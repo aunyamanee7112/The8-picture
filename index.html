@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Xu minghao</title>
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper/swiper-bundle.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+      crossorigin="anonymous"
+    ></script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="/__/firebase/8.1.2/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+    <!-- Initialize Firebase -->
+    <script src="/__/firebase/init.js"></script>
+  </head>
+  <body>
+    <section class="sectionSlider">
+      <div class="dataTab">
+        <p class="animate__animated animate__fadeInDown" id="description">
+          The 8 is member of seventeen K-pop boyGroup. His position is main
+          dance
+        </p>
+        <div class="textonTap">
+          <span id="musicList">Homerun</span>
+        </div>
+        <div class="img">
+          <div id="imgDome"></div>
+          <img src="/img/363856-qfx441-0.n.jpg" id="imgTitle" />
+        </div>
+      </div>
+      <div class="text">Xu Minghao <span id="number">No1</span></div>
+      <div class="swiper-container">
+        <div
+          class="animate__animated animate__backInUp chipDatail"
+          id="chipDatail"
+        >
+          <span class="chip">seventeen 17</span>
+          <span class="chip">The 8 💎</span>
+          <span class="chip">Chinese</span>
+        </div>
+        <div class="swiper-wrapper" id="demo">
+          <div
+            class="swiper-slide"
+            style="background-image: url(/img/D7VwvUnWsAAcaws.jpeg)"
+          ></div>
+          <div
+            class="swiper-slide"
+            style="
+              background-image: url(/img/seventeen-the8-e1588625243874.jpeg);
+            "
+          ></div>
+          <div
+            class="swiper-slide"
+            style="background-image: url(/img/the8.jfif)"
+          ></div>
+        </div>
+      </div>
+    </section>
+    <audio id="audio" autoplay loop>
+      <!---เครื่องเล่น-->
+      <source id="song" src="/img/080. 세븐틴(Seventeen)-01-HOME;RUN.mp3" />
+      <!----แผ่น-->
+    </audio>
+    <!-- <script src="/script.js"></script> -->
+    <script>
+      var no = 1;
+      var swiper = new Swiper(".swiper-container", {
+        effect: "cube",
+        grabCursor: true,
+        cubeEffect: {
+          shadow: false,
+          slideShadows: false,
+          shadowOffset: 20,
+          shadowScale: 0.94,
+        },
+        pagination: {
+          el: ".swiper-pagination",
+        },
+      });
+
+      var musicName = document.getElementById("musicList");
+      var num = document.getElementById("number");
+      var pic = document.getElementById("imgTitle");
+      var imgdome = document.getElementById("imgDome");
+      var description = document.getElementById("description");
+      var chipDatail = document.getElementById("chipDatail");
+      var song = document.getElementById("song");
+      var audio = document.getElementById("audio");
+      var musiclist = ["Highlight", "Oh my!", "lili yabbay"];
+      var songDirection = [
+        "/img/05 Highlight.mp3",
+        "/img/ohmy.mp3",
+        "/img/lili.mp3",
+      ];
+      var src = [
+        "/img/363856-qfx441-0.n.jpg",
+        "/img/original (1).jpg",
+        "/img/D8_ZiAAU8AA1KN1.jpg",
+      ];
+      swiper.on("slideChange", () => {
+        console.log(swiper.activeIndex);
+        musicName.innerHTML = musiclist[swiper.activeIndex];
+        num.innerHTML = "No" + (swiper.activeIndex + 1);
+        pic.src = src[swiper.activeIndex];
+        imgdome.style.animation = `PicAppear${swiper.activeIndex} 1s`;
+      });
+      swiper.on("sliderMove", () => {
+        if (swiper.activeIndex) {
+          description.style = "display:none";
+          chipDatail.style = "display:none";
+        }
+      });
+      swiper.on("touchStart", () => {
+        // chipDatail.classList.add("animate__backOutDown");
+      });
+      swiper.on("slideChangeTransitionEnd", () => {
+        description.style = "display:block";
+        chipDatail.style = "display:flex";
+        song.src = songDirection[swiper.activeIndex];
+        audio.load();
+        audio.play();
+      });
+    </script>
+  </body>
+</html>
